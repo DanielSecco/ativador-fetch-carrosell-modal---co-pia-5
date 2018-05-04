@@ -1,0 +1,215 @@
+/*////////////////////////////////////////*/
+#Viewport {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.Section {
+	position: relative;
+	width:  100%;
+	height:  100%;
+			
+	margin: 0;
+	padding: 0;
+}
+
+/*////////////////////////////////////////*/
+
+#Menu {
+	position: fixed;
+	z-index: 2;
+}
+
+#Menu ul {
+	padding-top: 10vh;
+}
+
+#Menu ul.Small {
+	padding-top: 5vh;
+}
+
+#Menu ul li {
+	display: inline-block;
+	padding-right: 4em;
+}
+
+#Menu .AnCLogo {
+	height: 18vh;
+	width: auto;
+}
+
+#Menu .AnCLogo.Small,
+.AnCLogo.Small {
+	height: 14vh;
+	width: auto;
+}
+
+.HelpButton {
+	position: fixed;
+	z-index: 10;
+
+	top: 1em;
+	right: 1em;
+
+	height: 4vh;
+	width: auto;
+}
+
+/*////////////////////////////////////////*/
+
+
+.pageLanding {
+	background-image: url('../img/bg_grama_cutted.jpg');
+	background-position: bottom;
+	background-repeat: repeat-x;
+	background-size: 30vh auto; 
+}
+
+.pageLanding .AnCBox,
+.AnCBox {
+	position: absolute;
+	height: 95vh;
+	width: auto;
+
+	top: 2.5vh;
+}
+
+.iPhone {
+	position: absolute;
+	bottom: 2em;
+	right: 27.5vw;
+
+	width: 22.5em;
+	height: auto;
+	
+	z-index: 90;
+}
+
+/*////////////////////////////////////////*/
+
+
+.pageInteracao {
+	background-color: #f2f2f2;
+}
+
+.pageInteracao img.Background {
+
+	z-index: -1;
+	height: 94vh;
+	width: auto;
+	margin: 0;
+	margin-left: -6em;
+	margin-bottom: -16em;
+
+	-webkit-transform: rotate(16deg);
+	-ms-transform: rotate(16deg);
+	-moz-transform: rotate(16deg);
+
+}
+
+.pageInteracao img.Button {
+	height: 8vh;
+	width: auto;
+}
+
+
+
+/*////////////////////////////////////////*/
+
+
+.pageCaixinha {
+}
+
+
+/*////////////////////////////////////////*/
+
+
+.pagePropaganda {}
+.pagePropaganda img.Background {
+	z-index: -1;
+	height: 98vh;
+	width: auto;
+	margin: 2vh 0 0 0;
+}
+
+
+/*////////////////////////////////////////*/
+
+
+.pageSid {}
+.pageSid img.Background {
+
+	z-index: -1;
+	height: 80vh;
+	width: auto;
+	
+	margin: 0 0 0 -35em;
+}
+
+
+
+/*////////////////////////////////////////*/
+
+.pageFormulario {}
+.pageFormulario .Logo {
+	width: 20vw;
+	margin: 5vh auto 2vh auto;
+}
+
+.pageFormulario.Grass,
+.Grass {
+	background-image: url('../img/bg_grama_cutted.jpg');
+	background-position: bottom;
+	background-repeat: repeat-x;
+}
+
+#Ask {
+	padding: 0 15vw;
+}
+
+/*////////////////////////////////////////*/
+	/* Mobile Landscape (min-width: 32em) and (max-width: 42em)
+	/////////////////////////////////////////*/
+	
+	@media screen and (orientation: landscape) and (max-width: 42em)
+	{
+		.pageInteracao img.Background {
+			height: 110vh;			
+			margin: 0 0 -6em -4em;
+		}
+
+		.pageSid img.Background {
+			margin: 0 0 0 -10em;
+		}
+
+		.HelpButton {
+			height: 10vh;
+			right: -4em;
+		}
+
+
+		.iPhone {
+			position: absolute;
+			bottom: .75em;
+			right: 27.5vw;
+			width: 6.5em;
+		}
+
+
+	}
+
+
+	@media screen and (orientation: portrait)
+	{
+		.pageFormulario .Logo {
+			width: 60vw;
+			margin: 5vh auto 0 auto;
+		}
+
+		.HelpButton {
+			right: -4em;
+			height: 6vh;
+		}
+
+
+	}

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.0.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.7f018d95116c221901afec92a1cb0a97.js"
+  "/precache-manifest.847413e5367ab6ccf0a2162e01377ef8.js"
 );
 
 importScripts('./src/js/idb.js');
@@ -113,6 +113,7 @@ self.addEventListener('sync', function(event) {
                var synData = {
                      id: dt.id,
                      image: dt.image,
+                   lele: dt.lele,
                      tag_num: dt.tag_num,
                      geolocation: dt.geolocation,
                      cod_Tree: dt.cod_Tree,
@@ -154,4 +155,29 @@ self.addEventListener('sync', function(event) {
         })
     );
   }
+});
+
+
+self.addEventListener('push', function(event) {
+  console.log('[Service Worker] Push Received.');
+  console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
+
+  const title = 'Push Codelab';
+  const options = {
+    body: 'Yay it works.',
+    icon: 'img/icons/apple-touch-icon.png',
+    badge: 'img/icons/apple-touch-icon.png'
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener('notificationclick', function(event) {
+  console.log('[Service Worker] Notification click Received.');
+
+  event.notification.close();
+
+  event.waitUntil(
+    clients.openWindow('https://developers.google.com/web/')
+  );
 });

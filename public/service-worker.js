@@ -282,3 +282,18 @@ self.addEventListener('sync', function(event) {
     );
   }
 });
+
+
+self.addEventListener('push', function(event) {
+  console.log('[Service Worker] Push Received.');
+  console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
+
+  const title = 'Push Codelab';
+  const options = {
+    body: 'Yay it works.',
+    icon: 'img/icons/apple-touch-icon.png',
+    badge: 'img/icons/apple-touch-icon.png'
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});

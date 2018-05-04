@@ -1,9 +1,10 @@
+
 importScripts('./src/js/idb.js');
 importScripts('./src/js/utility.js');
 importScripts('./src/js/fetch.js');
 
-workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
-workbox.setConfig({ debug: false });
+//workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
+workbox.setConfig({ debug: true });
 workbox.routing.registerRoute(/.*(?:googleapis|gstatic)\.com.*$/, workbox.strategies.staleWhileRevalidate({
   cacheName: 'google-fonts',
   cacheExpiration: {
@@ -25,7 +26,7 @@ workbox.routing.registerRoute(/.*(?:firebasestorage\.googleapis)\.com.*$/, workb
   cacheName: 'post-images'
 }));
 
-workbox.routing.registerRoute('https://ativadoroff.firebaseio.com/posts.json', function(args) {
+workbox.routing.registerRoute('https://valores-2585e.firebaseio.com/posts.json', function(args) {
   return fetch(args.event.request)
     .then(function (res) {
       var clonedRes = res.clone();
@@ -71,6 +72,7 @@ workbox.routing.registerRoute(function (routeData) {
 
 workbox.core.setCacheNameDetails({prefix: "pwa"});
 
+
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
  * requests for URLs in the manifest.
@@ -79,7 +81,6 @@ workbox.core.setCacheNameDetails({prefix: "pwa"});
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
-
 
 self.addEventListener('sync', function(event) {
   console.log('[Service Worker] Background syncing', event);
@@ -94,6 +95,7 @@ self.addEventListener('sync', function(event) {
                var synData = {
                      id: dt.id,
                      image: dt.image,
+                   lele: dt.lele,
                      tag_num: dt.tag_num,
                      geolocation: dt.geolocation,
                      cod_Tree: dt.cod_Tree,
@@ -105,7 +107,7 @@ self.addEventListener('sync', function(event) {
              
              console.log(synData);
            
-            fetch('https://ativadoroff.firebaseio.com/posts.json' , {
+            fetch('https://valores-2585e.firebaseio.com/posts.json' , {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

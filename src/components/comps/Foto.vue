@@ -41,11 +41,12 @@
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
                     return;
-                this.createImage(files[0]);
-                this.ResizeImage(files[0]);
+               this.createImage(files[0]);
+               // this.createImageTest(files[0]);
+            
                 var file = e.target.files[0];
                 //var storageRef = firebase.storage().ref(file.name);
-                console.log('<filename >', file.size);
+                console.log('<filename =============>', file.size);
                 var metadata = {
                     contentType: 'image/jpeg'
                 };
@@ -62,6 +63,66 @@
                     post = {
                         id: ind,
                         image: vm.image,
+                        lele: vm.image.length,
+                        tag_num: TagN,
+                        geolocation: GeoL,
+                        cod_Tree: CodTree,
+                        data: dataT.getDate() + '/' + dataT.getMonth() + 1 + '/' + dataT.getFullYear(),
+                        hora: dataT.getHours() + ':' + dataT.getMinutes() + ':' + dataT.getSeconds(),
+                        user: UsrN
+                    };
+                    console.log('variavel>', post);
+                    $("#imgLoad").remove();
+              this.ResizeImage(file);
+                };
+                reader.readAsDataURL(file);
+                console.log('readerfile > ', reader);
+            },
+            
+            createImageTest(file) {
+                 if (window.File && window.FileReader && window.FileList /*&& window.Blob*/) {
+                var dataT = new Date();
+                var image = new Image();
+                var reader = new FileReader();
+                var vm = this;
+                reader.onload = (e) => {
+                    vm.image = e.target.result;
+                    $("#lastIMG").append('<img  src="' + vm.image + '" width="100px" height="auto"/>');
+                    var ind = new Date().toISOString();
+                     var img = document.createElement("img");
+                            img.src =  vm.image;     //e.target.result;
+                    
+                            var canvas = document.createElement("canvas");
+                            var ctx = canvas.getContext("2d");
+                            ctx.drawImage(img, 0, 0);
+                            var MAX_WIDTH = 1024;
+                            var MAX_HEIGHT = 768;
+                            var width = img.width;
+                            var height = img.height;
+                            if (width > height) {
+                                if (width > MAX_WIDTH) {
+                                    height *= MAX_WIDTH / width;
+                                    width = MAX_WIDTH;
+                                }
+                            } else {
+                                if (height > MAX_HEIGHT) {
+                                    width *= MAX_HEIGHT / height;
+                                    height = MAX_HEIGHT;
+                                }
+                            }
+                            canvas.width = width;
+                            canvas.height = height;
+                            //var ctx = canvas.getContext("2d");
+                    
+                            ctx.drawImage(img, 0, 0, width, height);
+                     console.log('<filename ctx -------- >', ctx);
+                           var dataurl = canvas.toDataURL(file.type);
+                            document.getElementById('lastIMG').src = dataurl;
+                           
+                        console.log('readerfile new> ', dataurl);
+                    post = {
+                        id: ind,
+                        image: dataurl,
                         tag_num: TagN,
                         geolocation: GeoL,
                         cod_Tree: CodTree,
@@ -74,14 +135,12 @@
                 };
                 reader.readAsDataURL(file);
                 console.log('readerfile > ', reader);
-                // use the Blob or File API
-                /*storageRef.put(reader).then(function(snapshot) {
-                	console.log('Uploaded a blob or file!');
-                });*/
-                //console.log(image.innerText + '<kkkkk>');
+             
+            };
             },
+            
             ResizeImage(file) {
-                if (window.File && window.FileReader && window.FileList /*&& window.Blob*/) {
+                if (window.File && window.FileReader ) {
                    // var filesToUploads = document.getElementById('inputF').files;
                     //var file = filesToUploads[0];
                     //var file = post.image;
@@ -90,6 +149,7 @@
                         // Set the image once loaded into file reader
                         reader.onload = function(e) {
                             var img = document.createElement("img");
+                            img.id= 'result';
                             img.src = e.target.result;
                             var canvas = document.createElement("canvas");
                             var ctx = canvas.getContext("2d");
@@ -111,12 +171,13 @@
                             }
                             canvas.width = width;
                             canvas.height = height;
-                            var ctx = canvas.getContext("2d");
+                           // var ctx = canvas.getContext("2d");
                             ctx.drawImage(img, 0, 0, width, height);
                            var dataurl = canvas.toDataURL(file.type);
-                            document.getElementById('lastIMG').src = dataurl;
+                            //document.getElementById('lastIMG').src = dataurl;
                             post.image = dataurl;
-                        console.log('readerfile new> ', dataurl.length);
+                            post.lele = dataurl.length;
+                        console.log('readerfile new> ', post);
                         }
                         reader.readAsDataURL(file);
                     }
